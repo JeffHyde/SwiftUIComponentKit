@@ -1,4 +1,5 @@
 import SwiftUI
+import Combine
 
 open class TextComponentViewModel: ComponentViewModel {
     @Published var textType: TextType
@@ -16,6 +17,8 @@ open class TextComponentViewModel: ComponentViewModel {
     @Published var outerBackgroundColor: Color
     var onTap: ((String) -> ())?
     var textString: String = ""
+    
+    private var cancellables: Set<AnyCancellable> = Set()
     
     public init(
         textType: TextType,
@@ -48,16 +51,85 @@ open class TextComponentViewModel: ComponentViewModel {
         self.outerBackgroundColor = outerBackgroundColor
         self.onTap = onTap
         
-        switch textType {
-        case .standard(let string):
-            self.textString = string
-        case .attributed(let attributedString):
-            self.textString = attributedString.string
-        }
+        super.init()
+        
+        update()
+    }
+    
+    func update() {
+        $textType
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] output in
+                switch output {
+                case .standard(let string):
+                    self?.textString = string
+                case .attributed(let attributedString):
+                    self?.textString = attributedString.string
+                }
+            }
+            .store(in: &cancellables)
     }
 }
 
 public enum TextType {
     case standard(String)
     case attributed(NSMutableAttributedString)
+}
+
+
+import Combine
+
+class MyTextComponentViewModel: TextComponentViewModel {
+    @Environment(\.sizeCategory) private var sizeCategory
+    @Published var tapCount: Int = 0
+    private var cancellables: Set<AnyCancellable> = Set()
+    
+    init(text: String) {
+        super.init(
+            textType: .standard(text),
+            textAlignment: .center,
+            horizontalAlignment: .center,
+            foregroundColor: .primary,
+            backgroundColor: .secondary,
+            borderColor: .primary,
+            borderWidth: .small,
+            cornerRadius:  .small,
+            sizeType: .height(.xxxLarge),
+            innerPadding: .all(.medium),
+            outerPadding: .horizontal(.large),
+            outerBackgroundColor: .clear
+        )
+        
+        self.font = .clampedFont(for: sizeCategory, minSize: 10, maxSize: 24, weight: .bold)
+        self.onTap = { [weak self] _ in
+            self?.itemTapped()
+        }
+        
+        updateText()
+    }
+    
+    private func updateText() {
+        $tapCount
+            .receive(on: DispatchQueue.main)
+            .sink { output in
+                self.textType = .standard("\(self.textString): \(output)")
+            }
+            .store(in: &cancellables)
+    }
+    
+    func itemTapped() {
+        self.tapCount += 1
+    }
+}
+
+struct MyComponentScreen: View {
+    @StateObject var myTextViewModel = MyTextComponentViewModel(text: "Tap Count")
+
+    var body: some View {
+        ComponentView(viewComponent: .text(viewModel: myTextViewModel))
+    }
+}
+
+#Preview {
+  MyComponentScreen()
 }

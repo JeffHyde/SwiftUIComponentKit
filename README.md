@@ -32,18 +32,7 @@ The components and their corresponding view models follow the MVVM (Model-View-V
 
 Example: A TextComponentView has a corresponding TextComponentViewModel that contains all the necessary properties such as text, font, and foregroundColor etc. The @Published properties in the ViewModel ensure that any change in the data triggers an automatic update in the view.
 
-```swift
-open class TextComponentViewModel: ComponentViewModel {
-    @Published var text: String
-    @Published var font: Font
-    @Published var textAlignment: TextAlignment
-    @Published var foregroundColor: Color
-    // Other properties...
-}
-```
-
 This architecture enforces a clean separation of concerns, ensuring that the UI remains decoupled from business logic and can be more easily tested.
-
 
 ### 3. Customizable ViewModels
 Each component is fully customizable by providing an easily modifiable and overridable ViewModel. This provides flexibility in how each component behaves without needing to modify the component itself.
@@ -120,16 +109,17 @@ The components are modular and designed to work together, making it possible to 
 By leveraging MVVM and Combine, the library enforces a structure that is inherently testable. Each ViewModel can be unit tested independently of the UI, ensuring the behavior of the components is verified without needing to interact with the user interface.
 
 ```swift
-@Test func textComponentViewModel_text_didChange() async throws {
-    // Arrange
-    let viewModel = TextComponentViewModel(text: "Hello, World!")
-    
-    // Act
-    viewModel.text = "New Text"
-    
-    // Assert
-    #expect(viewModel.text == "New Text")
-}
+    @Test func test_tap_count() async throws {
+        // Arrange
+        let viewModel = MyTextComponentViewModel(text: "Tap Count")
+        
+        // Act
+        viewModel.itemTapped()
+        try await Task.sleep(nanoseconds: 1 * 1_000_000_000)
+        
+        // Assert
+        #expect(viewModel.textString == "Tap Count: 1")
+    }
 ```
 
 This results in faster development cycles, fewer bugs, and easier debugging.
@@ -157,6 +147,10 @@ The library also provides container views to combine multiple component views in
 The ViewComponent library is a powerful framework for developers looking to build reusable and customizable UI components in SwiftUI, all while maintaining best practices in architecture and testability. By enforcing the MVVM pattern with Combine, the library ensures clean separation of concerns, enhanced testability, and flexibility, making it a valuable tool for modern SwiftUI applications.
 
 Whether you're building simple UIs or complex layouts, ViewComponent simplifies the development process and promotes maintainable, scalable, and easily testable code. With its modular approach, it's easy to extend, and its integration with SwiftUI ensures that you're working with the most modern and efficient design patterns available.
+
+### Compatibility 
+
+iOS 17 +
 
 ### Installation
 
