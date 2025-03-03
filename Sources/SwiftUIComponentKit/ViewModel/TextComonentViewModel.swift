@@ -14,7 +14,8 @@ open class TextComponentViewModel: ComponentViewModel {
     @Published var innerPadding: PaddingModel
     @Published var outerPadding: PaddingModel
     @Published var outerBackgroundColor: Color
-    let onTap: ((String) -> ())?
+    var onTap: ((String) -> ())?
+    var textString: String = ""
     
     public init(
         textType: TextType,
@@ -46,6 +47,13 @@ open class TextComponentViewModel: ComponentViewModel {
         self.outerPadding = outerPadding
         self.outerBackgroundColor = outerBackgroundColor
         self.onTap = onTap
+        
+        switch textType {
+        case .standard(let string):
+            self.textString = string
+        case .attributed(let attributedString):
+            self.textString = attributedString.string
+        }
     }
 }
 

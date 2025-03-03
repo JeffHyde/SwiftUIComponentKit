@@ -20,3 +20,15 @@ struct VerticalComponentView: View {
         }
     }
 }
+
+#Preview {
+    VerticalComponentView(
+        components: [
+            .text(viewModel: TextComponentViewModel(textType: .standard("Text"))),
+            .divider(viewModel: DividerComponentViewModel()),
+            .button(viewModel: ButtonComponentViewModel(labelComponent: .text(viewModel: TextComponentViewModel(textType: .standard("Button")))))
+            
+        ],
+        spacing: .extraLarge
+    )
+}

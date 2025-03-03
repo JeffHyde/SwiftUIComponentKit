@@ -46,25 +46,68 @@ This architecture enforces a clean separation of concerns, ensuring that the UI 
 
 
 ### 3. Customizable ViewModels
-Each component is fully customizable by providing an easily modifiable ViewModel. This provides flexibility in how each component behaves without needing to modify the component itself.
+Each component is fully customizable by providing an easily modifiable and overridable ViewModel. This provides flexibility in how each component behaves without needing to modify the component itself.
 
-For example, in the TextComponentView, developers can change properties like text, font, foregroundColor, alignment, and more, via the TextComponentViewModel. The values are dynamically bound to the SwiftUI view and can be changed reactively.
+For example, developers can change properties like text, font, foregroundColor, padding, alignment, and more, via the TextComponentViewModel. The values are dynamically bound to the SwiftUI view and can be changed reactively.
 
 ```swift 
-struct TextComponentView: View {
-    @ObservedObject var viewModel: TextComponentViewModel
+import SwiftUI
+import Combine
+import SwiftUIComponentKit
+
+class MyTextViewModel: TextComponentViewModel {
+    @Environment(\.sizeCategory) private var sizeCategory
+    @Published var tapCount: Int = 0
+    private var cancellables: Set<AnyCancellable> = Set()
     
-    init(viewModel: TextComponentViewModel) {
-        self.viewModel = viewModel
+    init(text: String) {
+        super.init(
+            textType: .standard(text),
+            textAlignment: .center,
+            horizontalAlignment: .center,
+            foregroundColor: .primary,
+            backgroundColor: .secondary,
+            borderColor: .primary,
+            borderWidth: .small,
+            cornerRadius:  .small,
+            sizeType: .height(.xxxLarge),
+            innerPadding: .all(.medium),
+            outerPadding: .horizontal(.large),
+            outerBackgroundColor: .clear
+        )
+        
+        self.font = .clampedFont(for: sizeCategory, minSize: 10, maxSize: 24, weight: .bold)
+        self.onTap = { [weak self] _ in
+            self?.itemTapped()
+        }
+        
+        updateText()
     }
     
+    private func updateText() {
+        $tapCount
+            .receive(on: DispatchQueue.main)
+            .sink { output in
+                self.textType = .standard("\(self.textString): \(output)")
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func itemTapped() {
+        self.tapCount += 1
+    }
+}
+
+struct MyComponentScreen: View {
+    @StateObject var myTextViewModel = MyTextComponentViewModel()
+
     var body: some View {
-        Text(viewModel.text)
-            .font(viewModel.font)
-            .multilineTextAlignment(viewModel.textAlignment)
-            .foregroundColor(viewModel.foregroundColor)
-            // Other modifiers...
+        ComponentView(viewComponent: .text(viewModel: myTextViewModel))
     }
+}
+
+#Preview {
+  MyComponentScreen()
 }
 ```
 
@@ -97,8 +140,13 @@ After understanding the basic structure, integrating the components into your pr
 Example: 
 
 ```swift
-ComponentView(viewComponent: .button(viewModel: ButtonComponentViewModel(text: "Press Me")))
-ComponentView(viewComponent: .text(viewModel: TextComponentViewModel(text: "Hello, SwiftUI!")))
+ComponentView(
+  viewComponent: .text(
+    viewModel: TextComponentViewModel(
+      text: "Hello, SwiftUI!"
+    )
+  )
+)
 ```
 
 ### 7. Combining Views
@@ -112,4 +160,4 @@ Whether you're building simple UIs or complex layouts, ViewComponent simplifies 
 
 ### Installation
 
-To use the ViewComponent library, simply integrate it into your project using Swift Package manager and import SwiftUIComponentComponentKit.
+To use the ViewComponent library, simply integrate into your Xcode project using Swift Package manager and import SwiftUIComponentComponentKit.
