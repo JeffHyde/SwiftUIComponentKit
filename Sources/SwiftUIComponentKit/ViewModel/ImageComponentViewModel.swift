@@ -14,7 +14,8 @@ open class ImageComponentViewModel: ComponentViewModel {
     @Published var animationDuration: Double
     @Published var innerPadding: PaddingModel
     @Published var outerPadding: PaddingModel
-    var cache: ImageCacheable?
+    var imageCache: ImageCacheType
+    var cache: ImageCacheable? = nil
     var onTap: ((String) -> ())?
     
     @Published var loaded: Bool = false
@@ -32,9 +33,9 @@ open class ImageComponentViewModel: ComponentViewModel {
         height: CGFloat? = nil,
         progressSize: CGFloat? = 44,
         animationDuration: Double = 1,
+        imageCache: ImageCacheType = .none,
         innerPadding: PaddingModel = PaddingModel(),
         outerPadding: PaddingModel = PaddingModel(),
-        cache: ImageCacheable? = nil,
         onTap: ((String) -> ())? = nil
     ) {
         self.type = type
@@ -48,10 +49,17 @@ open class ImageComponentViewModel: ComponentViewModel {
         self.height = height
         self.progressSize = progressSize
         self.animationDuration = animationDuration
+        self.imageCache = imageCache
         self.innerPadding = innerPadding
         self.outerPadding = outerPadding
-        self.cache = cache
         self.onTap = onTap
+        
+        switch imageCache {
+        case .none:
+            self.cache = nil
+        case .custom(let imageCacheable):
+            self.cache = imageCacheable
+        }
     }
     
     func cachedImage() -> UIImage? {
@@ -64,7 +72,7 @@ open class ImageComponentViewModel: ComponentViewModel {
         }
     }
     
-    func success(image: Image) {
+    func success(image: UIImage) {
         setImageLoaded(image: image)
     }
     
@@ -73,7 +81,7 @@ open class ImageComponentViewModel: ComponentViewModel {
         setLoaded()
     }
     
-    private func setImageLoaded(image: Image) {
+    private func setImageLoaded(image: UIImage) {
         error = nil
         setLoaded()
         

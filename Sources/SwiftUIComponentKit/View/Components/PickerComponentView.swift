@@ -13,25 +13,44 @@ struct PickerComponentView: View {
         .onChange(of: viewModel.selectedItem) { oldValue, value in
             viewModel.action?(value)
         }
+        .padding(
+            EdgeInsets(
+                top: viewModel.innerPadding.top,
+                leading: viewModel.innerPadding.leading,
+                bottom: viewModel.innerPadding.bottom,
+                trailing: viewModel.innerPadding.trailing
+            )
+        )
         .background(RoundedRectangle(cornerRadius: 6).foregroundStyle(viewModel.backgroundColor))
+        .padding(
+            EdgeInsets(
+                top: viewModel.innerPadding.top,
+                leading: viewModel.innerPadding.leading,
+                bottom: viewModel.innerPadding.bottom,
+                trailing: viewModel.innerPadding.trailing
+            )
+        )
     }
 }
 
 #Preview {
-    let models = [
+    let items = [
         "1",
         "2",
         "3"
     ]
+    
     PickerComponentView(
         viewModel: PickerComponentViewModel(
             type: .segmented,
-            selectedItem: models[0],
-            items: models,
-            backgroundColor: .clear,
+            selectedItem: items[0],
+            items: items,
+            backgroundColor: .blue,
+            innerPadding: .all(.extraSmall),
+            outerPadding: .all(.large),
             action: { item in
                 print("Item Selected: \(item)")
             }
         )
-    ).padding(16)
+    )
 }

@@ -2,7 +2,7 @@ import SwiftUI
 
 /// The Base Type for ``SwiftUIComponentKit``.
 ///
-/// An enumerted type representing different view components within the ``SwiftUIComponentKit``.
+/// An enumerted type representing different ``View`` components within the ``SwiftUIComponentKit``.
 public enum ViewComponent {
     case button(viewModel: ButtonComponentViewModel)
     case cell(viewModel: CellComponentViewModel)

@@ -10,10 +10,14 @@ struct PickerComponentTests {
         #expect(viewModel.selectedItem == "")
         #expect(viewModel.items == [])
         #expect(viewModel.backgroundColor == .clear)
-        #expect(viewModel.padding.top == 0)
-        #expect(viewModel.padding.bottom == 0)
-        #expect(viewModel.padding.leading == 0)
-        #expect(viewModel.padding.trailing == 0)
+        #expect(viewModel.innerPadding.top == 0)
+        #expect(viewModel.innerPadding.bottom == 0)
+        #expect(viewModel.innerPadding.leading == 0)
+        #expect(viewModel.innerPadding.trailing == 0)
+        #expect(viewModel.outerPadding.top == 0)
+        #expect(viewModel.outerPadding.bottom == 0)
+        #expect(viewModel.outerPadding.leading == 0)
+        #expect(viewModel.outerPadding.trailing == 0)
         #expect(viewModel.action == nil)
     }
     

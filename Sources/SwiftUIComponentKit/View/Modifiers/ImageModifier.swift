@@ -34,13 +34,11 @@ struct ImageModifier: ViewModifier {
             .background(
                 RoundedRectangle(cornerRadius: viewModel.outerCornerRadius)
                     .foregroundStyle(viewModel.backgroundColor)
-                
-                
             )
             .clipShape(RoundedRectangle(cornerRadius: viewModel.outerCornerRadius))
             .overlay(
                 RoundedRectangle(cornerRadius: viewModel.outerCornerRadius)
-                    .stroke(viewModel.borderColor, lineWidth: viewModel.borderWidth)
+                    .strokeBorder(viewModel.borderColor, lineWidth: viewModel.borderWidth)
             )
             .padding(
                 EdgeInsets(

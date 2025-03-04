@@ -22,7 +22,9 @@ struct ImageComponentView: View {
                         case .success(let image):
                             ResizedImage(image)
                                 .onAppear {
-                                    viewModel.success(image: image)
+                                    let renderer = ImageRenderer(content: image)
+                                    guard let uiImage = renderer.uiImage else { return }
+                                    viewModel.success(image: uiImage)
                                 }
                         case .failure(let error):
                             ResizedImage(Image(systemName: placeHolder))
@@ -59,25 +61,9 @@ struct ImageComponentView: View {
 }
 
 #Preview {
-    VStack {
-        HStack {
-            ImageComponentView(
-                viewModel:
-                    ImageComponentViewModel(
-                    type: .async(
-                        url:  URL(string:
-                                    "https://vettestripes.com/wp-content/uploads/SmartSelect_20231213_113820_Instagram.jpg"),
-                        placeHolder: "trash"
-                    ),
-                    backgroundColor: .green,
-                    innerCornerRadius: 0,
-                    outerCornerRadius: 0,
-                    innerPadding: .all(0),
-                    outerPadding: .all(0)
-                )
-            )
-            Text("HELLO").padding(10)
-        }
+    @Previewable let imageCache = ComponentImageCache()
+    
+    ScrollView {
         ImageComponentView(
             viewModel: ImageComponentViewModel(
                 type: .system(name: "person", scale: .large),
@@ -87,16 +73,30 @@ struct ImageComponentView: View {
                 outerCornerRadius: 50,
                 width: 100,
                 height: 100,
+                imageCache: .custom(imageCache),
                 outerPadding: .all(24)
             )
         )
         
-        ImageComponentView(
-            viewModel: ImageComponentViewModel(
-                type: .custom(name: "Sample"),
-                outerPadding: .all(24)
-            )
-        )
+        VStack {
+            ForEach(0..<100, id: \.self) {item in
+                ImageComponentView(viewModel: ImageComponentViewModel(
+                    type: .async(
+                        url:  URL(string:
+                                    "https://vettestripes.com/wp-content/uploads/SmartSelect_20231213_113820_Instagram.jpg"),
+                        placeHolder: "trash"
+                    ),
+                    backgroundColor: .gray,
+                    borderColor: .red,
+                    borderWidth: 8,
+                    innerCornerRadius: 100,
+                    outerCornerRadius: 50,
+                    imageCache: .custom(imageCache),
+                    innerPadding: .all(0),
+                    outerPadding: .all(0)
+                ))
+            }
+
+        }
     }
 }
-

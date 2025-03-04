@@ -1,6 +1,6 @@
 import Foundation
 
-/// The type of tap gesture used for any view
+/// The type of tap gesture used for a slider
 public enum SliderTapType: Equatable {
     /// No tap gesture
     case none
