@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ImageModifier: ViewModifier {
-    var viewModel: ImageComponentViewModel
+    @ObservedObject var viewModel: ImageComponentViewModel
     
     func width() -> CGFloat? {
         if let width = viewModel.width {
@@ -48,6 +48,6 @@ struct ImageModifier: ViewModifier {
                     trailing: viewModel.outerPadding.trailing
                 )
             )
-            .onTapModifier(id: viewModel.id, onTap: viewModel.onTap)
+            .onTapModifier(id: viewModel.id, onTap: viewModel.action)
     }
 }

@@ -29,6 +29,6 @@ struct VerticalComponentView: View {
             .button(viewModel: ButtonComponentViewModel(labelComponent: .text(viewModel: TextComponentViewModel(textType: .standard("Button")))))
             
         ],
-        spacing: .extraLarge
+        spacing: .xLarge
     )
 }

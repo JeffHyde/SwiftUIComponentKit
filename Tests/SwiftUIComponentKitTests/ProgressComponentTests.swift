@@ -15,6 +15,6 @@ struct ProgressComponentTests {
         #expect(viewModel.padding.bottom == 0)
         #expect(viewModel.padding.leading == 0)
         #expect(viewModel.padding.trailing == 0)
-        #expect(viewModel.onTap == nil)
+        #expect(viewModel.action == nil)
     }
 }

@@ -1,14 +1,14 @@
 import SwiftUI
 
 open class PickerComponentViewModel: ComponentViewModel {
-    @Published var type: PickerType
-    @Published var localizedStringKey: String
-    @Published var selectedItem: String
-    @Published var items: [String]
-    @Published var backgroundColor: Color
-    @Published var innerPadding: PaddingModel
-    @Published var outerPadding: PaddingModel
-    @Published var action: ((String) -> ())?
+    @Published public var type: PickerType
+    @Published public var localizedStringKey: String
+    @Published public var selectedItem: String
+    @Published public var items: [String]
+    @Published public var backgroundColor: Color
+    @Published public var innerPadding: PaddingModel
+    @Published public var outerPadding: PaddingModel
+    public var action: ((String) -> ())?
     
     public init(
         type: PickerType = .segmented,

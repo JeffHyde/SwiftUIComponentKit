@@ -1,22 +1,22 @@
 import SwiftUI
 
 open class ImageComponentViewModel: ComponentViewModel {
-    @Published var type: ImageType
-    @Published var contentMode: ContentMode
-    @Published var backgroundColor: Color
-    @Published var borderColor: Color
-    @Published var borderWidth: Double
-    @Published var innerCornerRadius: Double
-    @Published var outerCornerRadius: Double
-    @Published var width: CGFloat?
-    @Published var height: CGFloat?
-    @Published var progressSize: CGFloat?
-    @Published var animationDuration: Double
-    @Published var innerPadding: PaddingModel
-    @Published var outerPadding: PaddingModel
-    var imageCache: ImageCacheType
-    var cache: ImageCacheable? = nil
-    var onTap: ((String) -> ())?
+    @Published public var type: ImageType
+    @Published public var contentMode: ContentMode
+    @Published public var backgroundColor: Color
+    @Published public var borderColor: Color
+    @Published public var borderWidth: Double
+    @Published public var innerCornerRadius: Double
+    @Published public var outerCornerRadius: Double
+    @Published public var width: CGFloat?
+    @Published public var height: CGFloat?
+    @Published public var progressSize: CGFloat?
+    @Published public var animationDuration: Double
+    @Published public var innerPadding: PaddingModel
+    @Published public var outerPadding: PaddingModel
+    public var imageCache: ImageCacheType
+    public var cache: ImageCacheable? = nil
+    public var action: ((String) -> ())?
     
     @Published var loaded: Bool = false
     @Published var error: Error? = nil
@@ -36,7 +36,7 @@ open class ImageComponentViewModel: ComponentViewModel {
         imageCache: ImageCacheType = .none,
         innerPadding: PaddingModel = PaddingModel(),
         outerPadding: PaddingModel = PaddingModel(),
-        onTap: ((String) -> ())? = nil
+        action: ((String) -> ())? = nil
     ) {
         self.type = type
         self.contentMode = contantMode
@@ -52,7 +52,7 @@ open class ImageComponentViewModel: ComponentViewModel {
         self.imageCache = imageCache
         self.innerPadding = innerPadding
         self.outerPadding = outerPadding
-        self.onTap = onTap
+        self.action = action
         
         switch imageCache {
         case .none:

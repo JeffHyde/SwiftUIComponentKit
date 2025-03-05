@@ -9,7 +9,7 @@ struct PickerComponentView: View {
                 Text(item)
             }
         }
-        .pickerType(viewModel.type)
+        .pickerType($viewModel.type)
         .onChange(of: viewModel.selectedItem) { oldValue, value in
             viewModel.action?(value)
         }
@@ -46,7 +46,7 @@ struct PickerComponentView: View {
             selectedItem: items[0],
             items: items,
             backgroundColor: .blue,
-            innerPadding: .all(.extraSmall),
+            innerPadding: .all(.xSmall),
             outerPadding: .all(.large),
             action: { item in
                 print("Item Selected: \(item)")

@@ -1,18 +1,18 @@
 import SwiftUI
 
 open class CellComponentViewModel: ComponentViewModel {
-    @Published var topTextViewModel: TextComponentViewModel
-    @Published var middleTextViewModel: TextComponentViewModel?
-    @Published var bottomTextViewModel: TextComponentViewModel?
-    @Published var leadingImageViewModel: ImageComponentViewModel?
-    @Published var trailingImageViewModel: ImageComponentViewModel?
-    @Published var leadingImageAlignment: VerticalAlignment
-    @Published var backgroundColor: Color
-    @Published var borderColor: Color
-    @Published var cornerRadius: CGFloat
-    @Published var borderWidth: CGFloat
-    @Published var shadowRadius: CGFloat
-    @Published var onTap: ((String) -> ())?
+    @Published public var topTextViewModel: TextComponentViewModel
+    @Published public var middleTextViewModel: TextComponentViewModel?
+    @Published public var bottomTextViewModel: TextComponentViewModel?
+    @Published public var leadingImageViewModel: ImageComponentViewModel?
+    @Published public var trailingImageViewModel: ImageComponentViewModel?
+    @Published public var leadingImageAlignment: VerticalAlignment
+    @Published public var backgroundColor: Color
+    @Published public var borderColor: Color
+    @Published public var cornerRadius: CGFloat
+    @Published public var borderWidth: CGFloat
+    @Published public var shadowRadius: CGFloat
+    public var action: ((String) -> ())?
     
     public init(
         topTextViewModel: TextComponentViewModel,
@@ -26,7 +26,7 @@ open class CellComponentViewModel: ComponentViewModel {
         cornerRadius: CGFloat = 0.0,
         borderWidth: CGFloat = 0.0,
         shadowRadius: CGFloat = 0.0,
-        onTap: ((String) -> ())? = nil
+        action: ((String) -> ())? = nil
     ) {
         self.topTextViewModel = topTextViewModel
         self.middleTextViewModel = middleTextViewModel
@@ -39,6 +39,6 @@ open class CellComponentViewModel: ComponentViewModel {
         self.cornerRadius = cornerRadius
         self.borderWidth = borderWidth
         self.shadowRadius = shadowRadius
-        self.onTap = onTap
+        self.action = action
     }
 }

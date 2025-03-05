@@ -6,8 +6,8 @@ import SwiftUI
 ///
 /// Horizontal = width
 struct FrameModifier: ViewModifier {
-    var displayType: DisplayType
-    var size: CGFloat
+    @Binding var displayType: DisplayType
+    @Binding var size: CGFloat
     
     func body(
         content: Content

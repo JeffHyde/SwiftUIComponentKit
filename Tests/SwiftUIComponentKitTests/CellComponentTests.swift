@@ -17,6 +17,6 @@ struct CellComponentTests {
         #expect(viewModel.cornerRadius == 0.0)
         #expect(viewModel.borderWidth == 0.0)
         #expect(viewModel.shadowRadius == 0.0)
-        #expect(viewModel.onTap == nil)
+        #expect(viewModel.action == nil)
     }
 }

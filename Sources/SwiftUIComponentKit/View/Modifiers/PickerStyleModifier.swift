@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct PickerStyleModifier: ViewModifier {
-    var type: PickerType
+    @Binding var type: PickerType
     
     func body(
         content: Content

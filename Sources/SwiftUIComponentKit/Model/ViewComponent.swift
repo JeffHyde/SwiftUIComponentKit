@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// The Base Type for ``SwiftUIComponentKit``.
+/// The Base View Type for ``SwiftUIComponentKit``.
 ///
 /// An enumerted type representing different ``View`` components within the ``SwiftUIComponentKit``.
 public enum ViewComponent {

@@ -1,17 +1,17 @@
 import SwiftUI
 
 open class ProgressComponentViewModel: ComponentViewModel {
-    @Published var style: ProgressStyle
-    @Published var padding: PaddingModel
-    @Published var onTap:  ((String) -> ())?
+    @Published public var style: ProgressStyle
+    @Published public var padding: PaddingModel
+    public var action: ((String) -> ())?
     
     public init(
         style: ProgressStyle = .wheel,
         padding: PaddingModel = PaddingModel(),
-        onTap: ((String) -> ())? = nil
+        action: ((String) -> ())? = nil
     ) {
         self.style = style
         self.padding = padding
-        self.onTap = onTap
+        self.action = action
     }
 }

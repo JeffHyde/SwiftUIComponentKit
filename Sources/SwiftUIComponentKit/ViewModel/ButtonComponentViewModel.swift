@@ -1,9 +1,9 @@
 import SwiftUI
 
 open class ButtonComponentViewModel: ComponentViewModel {
-    @Published var labelComponent: ViewComponent
-    @Published var padding: PaddingModel
-    @Published var action: ((String) -> ())?
+    @Published public var labelComponent: ViewComponent
+    @Published public var padding: PaddingModel
+    public var action: ((String) -> ())?
 
     public init(
         labelComponent: ViewComponent = .text(viewModel: TextComponentViewModel(textType: .standard("Hello"))),

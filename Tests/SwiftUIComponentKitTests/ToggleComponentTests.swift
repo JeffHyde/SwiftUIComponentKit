@@ -6,7 +6,7 @@ struct ToggleComponentTests {
         let viewModel = ToggleComponentViewModel()
         
         #expect(viewModel.isOn == false)
-        #expect(viewModel.horizontalAlignment == .center)
+        #expect(viewModel.horizontalAlignment == .none)
         #expect(viewModel.padding.top == 0)
         #expect(viewModel.padding.bottom == 0)
         #expect(viewModel.padding.leading == 0)

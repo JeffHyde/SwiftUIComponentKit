@@ -1,13 +1,13 @@
 import SwiftUI
 
 open class DividerComponentViewModel: ComponentViewModel {
-    @Published var thickness: Double
-    @Published var color: Color
-    @Published var padding: PaddingModel
-    @Published var displayType: DisplayType
+    @Published public var thickness: CGFloat
+    @Published public var color: Color
+    @Published public var padding: PaddingModel
+    @Published public var displayType: DisplayType
     
     public init(
-        thickness: Double = 1,
+        thickness: CGFloat = 1,
         color: Color = .primary,
         padding: PaddingModel = PaddingModel(),
         displayType: DisplayType = .vertical

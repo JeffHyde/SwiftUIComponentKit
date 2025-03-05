@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct VerticallyAlignedModifier: ViewModifier {
-    var alignment: VerticalAlignment?
+    @Binding var alignment: VerticalAlignment?
     
     func body(
         content: Content

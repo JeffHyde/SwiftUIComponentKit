@@ -27,7 +27,7 @@ struct TextComponentView: View {
                 trailing: viewModel.innerPadding.trailing
             )
         )
-        .textSize(viewModel.sizeType)
+        .textSize($viewModel.sizeType)
         .background(
             RoundedRectangle(cornerRadius: viewModel.cornerRadius)
                 .fill(viewModel.backgroundColor)
@@ -36,7 +36,7 @@ struct TextComponentView: View {
             RoundedRectangle(cornerRadius: viewModel.cornerRadius)
                 .stroke(viewModel.borderColor, lineWidth: viewModel.borderWidth)
         )
-        .onTapModifier(id: viewModel.id, onTap: viewModel.onTap)
+        .onTapModifier(id: viewModel.id, onTap: viewModel.action)
         .padding(
             EdgeInsets(
                 top: viewModel.outerPadding.top,
@@ -45,13 +45,13 @@ struct TextComponentView: View {
                 trailing: viewModel.outerPadding.trailing
             )
         )
-        .horizontallyAligned(viewModel.horizontalAlignment)
+        .horizontallyAligned($viewModel.horizontalAlignment)
         .background(viewModel.outerBackgroundColor)
     }
 }
 
 #Preview {
-    @Previewable @Environment(\.sizeCategory) var sizeCategory
+    @Previewable @Environment(\.dynamicTypeSize) var dynamicTypeSize
     let attributedString: NSMutableAttributedString = {
         let text = "Hello World"
         var string = NSMutableAttributedString(string: text)
@@ -70,18 +70,18 @@ struct TextComponentView: View {
     VStack {
         TextComponentView(
             viewModel: TextComponentViewModel(
-                textType: .standard("Hello\nWorld!"),
-                font: .clampedFont(for: sizeCategory),
+                textType: .standard("Hello World!"),
+                font: .clampedFont(for: dynamicTypeSize),
                 textAlignment: .center,
                 foregroundColor: .primary,
                 backgroundColor: .secondary,
                 borderColor: .primary,
-                borderWidth: .extraSmall,
-                cornerRadius: .extraLarge,
+                borderWidth: .xSmall,
+                cornerRadius: .xLarge,
                 sizeType: .flexable,
-                innerPadding: .all(.extraLarge),
+                innerPadding: .all(.xLarge),
                 outerPadding: .all(.none),
-                onTap: { id in
+                action: { id in
                     print("On Tap: \(id)")
                 }
             )
@@ -97,7 +97,7 @@ struct TextComponentView: View {
                 sizeType: .widthAndHeight(width: 200, height: 80),
                 innerPadding: .all(.large),
                 outerPadding: .all(.none),
-                onTap: { id in
+                action: { id in
                     print("On Tap: \(id)")
                 }
             )

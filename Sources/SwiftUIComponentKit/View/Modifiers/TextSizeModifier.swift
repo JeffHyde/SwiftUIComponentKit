@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct TextSizeModifier: ViewModifier {
-    var sizeType: TextSizeType
+    @Binding var sizeType: TextSizeType
     
     func body(content: Content) -> some View {
         switch sizeType {

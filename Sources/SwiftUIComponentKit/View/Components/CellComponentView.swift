@@ -53,7 +53,7 @@ struct CellComponentView: View {
                 .foregroundStyle(viewModel.backgroundColor )
                 .shadow(radius: viewModel.shadowRadius, x: 0, y: viewModel.shadowRadius)
         )
-        .onTapModifier(id: viewModel.id, onTap: viewModel.onTap)
+        .onTapModifier(id: viewModel.id, onTap: viewModel.action)
     }
 }
 
@@ -106,7 +106,7 @@ struct CellComponentView: View {
                 cornerRadius: 4,
                 borderWidth: 0.5,
                 shadowRadius: 3,
-                onTap: { id in print("Cell Tapped") }
+                action: { id in print("Cell Tapped") }
             )
         )
         
@@ -157,7 +157,7 @@ struct CellComponentView: View {
                 cornerRadius: 4,
                 borderWidth: 0.5,
                 shadowRadius: 3,
-                onTap: { _ in print("Cell Tapped") }
+                action: { _ in print("Cell Tapped") }
             )
         )
     }

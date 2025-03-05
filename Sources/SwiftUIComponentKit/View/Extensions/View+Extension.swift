@@ -2,12 +2,12 @@ import SwiftUI
 
 extension View {
     /// `VerticallyAlignedModifier`
-    func verticallyAligned(_ alignment: VerticalAlignment? = .center) -> some View {
+    func verticallyAligned(_ alignment: Binding<VerticalAlignment?> = .constant(.center)) -> some View {
         modifier(VerticallyAlignedModifier(alignment: alignment))
     }
     
     /// `HorizontallyAlignedModifier`
-    func horizontallyAligned(_ alignment: HorizontalAlignment? = .center) -> some View {
+    func horizontallyAligned(_ alignment: Binding<HorizontalAlignment?> = .constant(.center)) -> some View {
         modifier(HorizontallyAlignedModifier(alignment: alignment))
     }
     
@@ -17,12 +17,12 @@ extension View {
     }
     
     /// `PickerStyleModifier`
-    func pickerType(_ type: PickerType) -> some View {
+    func pickerType(_ type: Binding<PickerType>) -> some View {
         modifier(PickerStyleModifier(type: type))
     }
     
     /// `TextSizeModifier`
-    func textSize(_ type: TextSizeType) -> some View {
+    func textSize(_ type: Binding<TextSizeType>) -> some View {
         modifier(TextSizeModifier(sizeType: type))
     }
     
@@ -32,7 +32,7 @@ extension View {
     }
     
     /// `FrameModifier`
-    func framed(_ displayType: DisplayType = .horizontal, size: CGFloat) -> some View {
+    func framed(_ displayType: Binding<DisplayType> = .constant(.horizontal), size: Binding<CGFloat>) -> some View {
         modifier(FrameModifier(displayType: displayType, size: size))
     }
     

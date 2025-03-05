@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct HorizontallyAlignedModifier: ViewModifier {
-    var alignment: HorizontalAlignment?
+    @Binding var alignment: HorizontalAlignment?
     
     func body(
         content: Content

@@ -13,7 +13,7 @@ public extension PaddingModel {
     
     /// PaddingModel(top: value, leading: .extraLarge, bottom: value, trailing: .none)
     static func vertical(_ value: Double) -> PaddingModel {
-        return PaddingModel(top: value, leading: .extraLarge, bottom: value, trailing: .none)
+        return PaddingModel(top: value, leading: .none, bottom: value, trailing: .none)
     }
     
     /// PaddingModel(top: .none, leading: value, bottom: .none, trailing: value)

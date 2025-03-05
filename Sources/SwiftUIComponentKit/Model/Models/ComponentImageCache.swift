@@ -1,11 +1,15 @@
 import SwiftUI
 
+/// The default SwiftUIComponentKit image cache
 public class ComponentImageCache: ImageCacheable, @unchecked Sendable {
     /// The NSCache for storing images
     private let cache = NSCache<NSString, UIImage>()
     
     /// The operation queue
     private let cacheQueue = DispatchQueue(label: "imagecache_queue", attributes: .concurrent)
+    
+    /// Creates a ComponentImageCache
+    public init() {}
     
     /// The Image stored in the cache from a URL key
     /// - Parameter urlString: The URL String Key

@@ -2,14 +2,13 @@ import SwiftUI
 import Combine
 
 open class SliderComponentViewModel: ComponentViewModel {
-    @Published var value: Double
-    @Published var range: ClosedRange<Double>
-    @Published var padding: PaddingModel
-    @Published var tapCount: Int
-    @Published var tapType: SliderTapType
-    
-    var cancellables: Set<AnyCancellable> = Set()
+    @Published public var value: Double
+    @Published public var range: ClosedRange<Double>
+    @Published public var padding: PaddingModel
+    @Published public var tapCount: Int
+    public var tapType: SliderTapType
     private let tapSubject = PassthroughSubject<(CGPoint, CGFloat), Never>()
+    private var cancellables: Set<AnyCancellable> = Set()
 
     public init(
         value: Double = 0.0,

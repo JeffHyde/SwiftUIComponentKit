@@ -20,7 +20,7 @@ struct ProgressComponentView: View {
                 trailing: viewModel.padding.trailing
             )
         )
-        .onTapModifier(id: viewModel.id, onTap: viewModel.onTap)
+        .onTapModifier(id: viewModel.id, onTap: viewModel.action)
     }
 }
 
@@ -30,7 +30,7 @@ struct ProgressComponentView: View {
             viewModel: ProgressComponentViewModel(
                 style: .bar(title: "Title", progress: 50, total: 100),
                 padding: .all(.zero),
-                onTap: { id in
+                action: { id in
                     print("Bar Pressed: \(id)")
                 }
             )

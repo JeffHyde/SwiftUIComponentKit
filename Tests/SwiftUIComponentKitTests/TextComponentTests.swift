@@ -36,6 +36,6 @@ struct TextComponentTests {
         #expect(viewModel.outerPadding.leading == 0)
         #expect(viewModel.outerPadding.trailing == 0)
         #expect(viewModel.outerBackgroundColor == .clear)
-        #expect(viewModel.onTap == nil)
+        #expect(viewModel.action == nil)
     }
 }

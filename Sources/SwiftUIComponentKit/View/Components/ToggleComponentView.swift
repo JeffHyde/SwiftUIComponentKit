@@ -1,6 +1,5 @@
 import SwiftUI
 
-
 struct ToggleComponentView: View {
     @ObservedObject var viewModel: ToggleComponentViewModel
 
@@ -15,7 +14,7 @@ struct ToggleComponentView: View {
                     trailing: viewModel.padding.trailing
                 )
             )
-            .horizontallyAligned(viewModel.horizontalAlignment)
+            .horizontallyAligned($viewModel.horizontalAlignment)
     }
 }
 

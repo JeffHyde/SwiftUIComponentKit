@@ -10,7 +10,7 @@ struct DividerComponentView: View {
     var body: some View {
         Rectangle()
             .fill(viewModel.color)
-            .framed(viewModel.displayType, size: viewModel.thickness)
+            .framed($viewModel.displayType, size: $viewModel.thickness)
             .padding(
                 EdgeInsets(
                     top: viewModel.padding.top,
