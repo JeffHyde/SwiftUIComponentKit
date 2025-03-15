@@ -1,10 +1,10 @@
 import SwiftUI
 
-struct HorizontalComponentView: View {
-    let components: [ViewComponent]
-    let spacing: Double
+public struct HorizontalComponentView: View {
+    public var components: [ViewComponent]
+    public var spacing: Double
     
-    init(
+    public init(
         components: [ViewComponent],
         spacing: Double = .zero
     ) {
@@ -12,7 +12,7 @@ struct HorizontalComponentView: View {
         self.spacing = spacing
     }
     
-    var body: some View {
+    public var body: some View {
         HStack(spacing: spacing) {
             ForEach(Array(components.enumerated()), id: \.offset) { (_, component) in
               ComponentView(viewComponent: component)

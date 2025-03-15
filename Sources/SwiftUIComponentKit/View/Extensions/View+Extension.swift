@@ -2,12 +2,12 @@ import SwiftUI
 
 extension View {
     /// `VerticallyAlignedModifier`
-    func verticallyAligned(_ alignment: Binding<VerticalAlignment?> = .constant(.center)) -> some View {
+    func verticallyAligned(_ alignment: Binding<VerticalAlignment?> = .constant(nil)) -> some View {
         modifier(VerticallyAlignedModifier(alignment: alignment))
     }
     
     /// `HorizontallyAlignedModifier`
-    func horizontallyAligned(_ alignment: Binding<HorizontalAlignment?> = .constant(.center)) -> some View {
+    func horizontallyAligned(_ alignment: Binding<HorizontalAlignment?> = .constant(nil)) -> some View {
         modifier(HorizontallyAlignedModifier(alignment: alignment))
     }
     
@@ -39,5 +39,10 @@ extension View {
     /// `RefreshModifier`
     func refresh(refreshable: Bool, action: @escaping () -> ()) -> some View {
         modifier(RefreshModifier(refreshable: refreshable, action: action))
+    }
+    
+    /// `NavigationLinkModifier`
+    func navigatable<Destination: View>(_ destination: Destination?) -> some View {
+        modifier(NavigationLinkModifier(destination: destination))
     }
 }

@@ -1,10 +1,10 @@
 import SwiftUI
 
-struct VerticalComponentView: View {
-    let components: [ViewComponent]
-    let spacing: Double
+public struct VerticalComponentView: View {
+    public var components: [ViewComponent]
+    public var spacing: Double
     
-    init(
+    public init(
         components: [ViewComponent],
         spacing: Double = .zero
     ) {
@@ -12,7 +12,7 @@ struct VerticalComponentView: View {
         self.spacing = spacing
     }
     
-    var body: some View {
+    public var body: some View {
         VStack(spacing: spacing) {
             ForEach(Array(components.enumerated()), id: \.offset) { (_, component) in
               ComponentView(viewComponent: component)

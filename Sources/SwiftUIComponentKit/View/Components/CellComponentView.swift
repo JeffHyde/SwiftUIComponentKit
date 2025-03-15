@@ -54,6 +54,15 @@ struct CellComponentView: View {
                 .shadow(radius: viewModel.shadowRadius, x: 0, y: viewModel.shadowRadius)
         )
         .onTapModifier(id: viewModel.id, onTap: viewModel.action)
+        .navigatable(viewModel.navigationDestination)
+        .padding(
+            EdgeInsets(
+                top: viewModel.padding.top,
+                leading: viewModel.padding.leading,
+                bottom: viewModel.padding.bottom,
+                trailing: viewModel.padding.trailing
+            )
+        )
     }
 }
 

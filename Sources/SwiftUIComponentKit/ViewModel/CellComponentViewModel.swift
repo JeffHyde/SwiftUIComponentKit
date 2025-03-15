@@ -1,5 +1,6 @@
 import SwiftUI
 
+/// A combination of components to define a cell for any type of cell design
 open class CellComponentViewModel: ComponentViewModel {
     @Published public var topTextViewModel: TextComponentViewModel
     @Published public var middleTextViewModel: TextComponentViewModel?
@@ -12,8 +13,26 @@ open class CellComponentViewModel: ComponentViewModel {
     @Published public var cornerRadius: CGFloat
     @Published public var borderWidth: CGFloat
     @Published public var shadowRadius: CGFloat
+    @Published public var padding: PaddingModel
+    @Published var navigationDestination: AnyView?
     public var action: ((String) -> ())?
     
+    /// Creates a Cell Component with defaults
+    /// - Parameters:
+    ///   - topTextViewModel: ``TextComponentViewModel``
+    ///   - middleTextViewModel: ``TextComponentViewModel``
+    ///   - bottomTextViewModel: ``TextComponentViewModel``
+    ///   - leadingImageViewModel: ``ImageComponentViewModel``
+    ///   - trailingImageViewModel: ``ImageComponentViewModel``
+    ///   - leadingImageAlignment: ``VerticalAlignment``
+    ///   - backgroundColor: ``Color``
+    ///   - borderColor: ``Color``
+    ///   - cornerRadius: ``CGFloat``
+    ///   - borderWidth: ``CGFloat``
+    ///   - shadowRadius: ``CGFloat``
+    ///   - padding: ``PaddingModel``
+    ///   - navigationDestination: Navigation Stack Destination View, if used set action to nil
+    ///   - action: On Tap Action, if used set navigationDestination to nil
     public init(
         topTextViewModel: TextComponentViewModel,
         middleTextViewModel: TextComponentViewModel? = nil,
@@ -23,9 +42,11 @@ open class CellComponentViewModel: ComponentViewModel {
         leadingImageAlignment: VerticalAlignment = .center,
         backgroundColor: Color = .clear,
         borderColor: Color = .clear,
-        cornerRadius: CGFloat = 0.0,
-        borderWidth: CGFloat = 0.0,
-        shadowRadius: CGFloat = 0.0,
+        cornerRadius: CGFloat = .none,
+        borderWidth: CGFloat = .none,
+        shadowRadius: CGFloat = .none,
+        padding: PaddingModel = .all(.none),
+        navigationDestination: AnyView? = nil,
         action: ((String) -> ())? = nil
     ) {
         self.topTextViewModel = topTextViewModel
@@ -39,6 +60,8 @@ open class CellComponentViewModel: ComponentViewModel {
         self.cornerRadius = cornerRadius
         self.borderWidth = borderWidth
         self.shadowRadius = shadowRadius
+        self.padding = padding
+        self.navigationDestination = navigationDestination
         self.action = action
     }
 }

@@ -1,19 +1,19 @@
 import SwiftUI
 
-struct ScrollableComponentView: View {
-    let headerComponents: [ViewComponent]
-    let scrollableComponents: [ViewComponent]
-    let footerComponents: [ViewComponent]
-    let scrollAxis: Axis.Set
-    let contentSpacing: CGFloat
-    let headerSpacing: CGFloat
-    let scrollSpacing: CGFloat
-    let footerSpacing: CGFloat
-    let backgroundColor: Color
-    let refreshable: Bool
-    let onRefresh: () -> ()
+public struct ScrollableComponentView: View {
+    public var headerComponents: [ViewComponent]
+    public var scrollableComponents: [ViewComponent]
+    public var footerComponents: [ViewComponent]
+    public var scrollAxis: Axis.Set
+    public var contentSpacing: CGFloat
+    public var headerSpacing: CGFloat
+    public var scrollSpacing: CGFloat
+    public var footerSpacing: CGFloat
+    public var backgroundColor: Color
+    public var refreshable: Bool
+    public var onRefresh: () -> ()
     
-    init(
+    public init(
         headerComponents: [ViewComponent] = [],
         scrollableComponents: [ViewComponent],
         footerComponents: [ViewComponent] = [],
@@ -39,7 +39,7 @@ struct ScrollableComponentView: View {
         self.onRefresh = onRefresh
     }
     
-    var body: some View {
+    public var body: some View {
         VStack(spacing: contentSpacing) {
             VerticalComponentView(components: headerComponents, spacing: headerSpacing)
             
