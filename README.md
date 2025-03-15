@@ -44,12 +44,12 @@ import SwiftUI
 import Combine
 import SwiftUIComponentKit
 
-class MyTextViewModel: TextComponentViewModel {
-    @Environment(\.sizeCategory) private var sizeCategory
+public class MyTextComponentViewModel: TextComponentViewModel {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Published var tapCount: Int = 0
     private var cancellables: Set<AnyCancellable> = Set()
     
-    init(text: String) {
+    public init(text: String) {
         super.init(
             textType: .standard(text),
             textAlignment: .center,
@@ -65,8 +65,14 @@ class MyTextViewModel: TextComponentViewModel {
             outerBackgroundColor: .clear
         )
         
-        self.font = .clampedFont(for: sizeCategory, minSize: 10, maxSize: 24, weight: .bold)
-        self.onTap = { [weak self] _ in
+        self.font = .clampedFont(
+            for: dynamicTypeSize,
+            size:  16,
+            factor: 2.0,
+            weight: .regular
+        )
+        
+        self.action = { [weak self] _ in
             self?.itemTapped()
         }
         
@@ -77,18 +83,18 @@ class MyTextViewModel: TextComponentViewModel {
         $tapCount
             .receive(on: DispatchQueue.main)
             .sink { output in
-                self.textType = .standard("\(self.textString): \(output)")
+                self.textType = .standard("Tap Count: \(output)")
             }
             .store(in: &cancellables)
     }
     
-    private func itemTapped() {
+    func itemTapped() {
         self.tapCount += 1
     }
 }
 
 struct MyComponentScreen: View {
-    @StateObject var myTextViewModel = MyTextComponentViewModel()
+    @StateObject var myTextViewModel = MyTextComponentViewModel(text: "Tap Count")
 
     var body: some View {
         ComponentView(viewComponent: .text(viewModel: myTextViewModel))
@@ -98,6 +104,7 @@ struct MyComponentScreen: View {
 #Preview {
   MyComponentScreen()
 }
+
 ```
 
 ### 4. Reusable and Modular UI Components
@@ -118,7 +125,11 @@ By leveraging MVVM and Combine, the library enforces a structure that is inheren
         try await Task.sleep(nanoseconds: 1 * 1_000_000_000)
         
         // Assert
-        #expect(viewModel.textString == "Tap Count: 1")
+        if case .standard("Tap Count: 1") = viewModel.textType {
+            #expect(true)
+        } else {
+            #expect(Bool(false))
+        }
     }
 ```
 
@@ -154,4 +165,8 @@ iOS 17 +
 
 ### Installation
 
-To use the ViewComponent library, simply integrate into your Xcode project using Swift Package manager and import SwiftUIComponentComponentKit.
+To use the ViewComponent library, simply integrate into your Xcode project using Swift Package manager and import SwiftUIComponentKit.
+
+```swift 
+import SwiftUI
+```
