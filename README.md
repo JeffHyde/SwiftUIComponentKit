@@ -2,9 +2,9 @@
 
 ## Overview
 
-The **ViewComponent** library is a SwiftUI-based framework designed to simplify and streamline the creation of reusable UI components. By enforcing a robust **MVVM (Model-View-ViewModel)** architecture pattern using **Combine**, the library aims to create a highly testable and maintainable structure for SwiftUI views. The components are encapsulated as enums, where each type of view has its own customizable and overridable `ViewModel`.
+The **SwiftUIComponentKit** library is a SwiftUI-based framework designed to simplify and streamline the creation of reusable UI components. By leveraging a robust **MVVM (Model-View-ViewModel)** architecture pattern with **Combine**, the library aims to create a highly testable and maintainable structure for SwiftUI views. The components are encapsulated as enums, where each type of view has its own customizable and overridable `ViewModel`.
 
-The goal of this library is to provide an easy-to-use system for building components while maintaining flexibility and testability in your SwiftUI projects. Once the core concepts are understood, using this library allows developers to quickly and effectively display views, promoting best practices in code organization and maintainability.
+This library is to provide a simple, flexable system for building components while maintaining flexibility and testability in your SwiftUI projects. Once the core concepts are understood, using this library allows developers to quickly and effectively display views, promoting best practices in code organization and maintainability.
 
 ## Key Features and Benefits
 
@@ -28,9 +28,9 @@ public enum ViewComponent {
 ```
 
 ### 2. MVVM Architecture with Combine
-The components and their corresponding view models follow the MVVM (Model-View-ViewModel) pattern. Each ViewModel is responsible for handling the data and logic behind the view, while the View is solely concerned with presenting the UI. By utilizing Combine, each ViewModel is reactive, ensuring that changes in the data are automatically reflected in the view.
+The components and their corresponding view models follow the MVVM (Model-View-ViewModel) pattern.  ViewModels manage data and business logic, while Views focus on UI presentation.  By utilizing Combine, each ViewModel is reactive, ensuring that changes in the data are automatically reflected in the view.
 
-Example: A TextComponentView has a corresponding TextComponentViewModel that contains all the necessary properties such as text, font, and foregroundColor etc. The @Published properties in the ViewModel ensure that any change in the data triggers an automatic update in the view.
+Example: A TextComponentView has a corresponding TextComponentViewModel that contains all the necessary properties such as text, font, foregroundColor, etc. The @Published properties in the ViewModel ensure that any change in the data triggers an automatic update in the view.
 
 This architecture enforces a clean separation of concerns, ensuring that the UI remains decoupled from business logic and can be more easily tested.
 
@@ -108,9 +108,8 @@ struct MyComponentScreen: View {
 ```
 
 ### 4. Reusable and Modular UI Components
-All components within the library are built to be reusable. The enum structure makes it easy to manage and add new components to the system. For example, you can add more component cases to the ViewComponent enum (e.g., TextFieldComponentView or ButtonGroupComponentView) without disrupting the existing structure.
 
-The components are modular and designed to work together, making it possible to compose complex UIs by combining simpler components.
+The library’s enum-based structure makes components modular, reusable, and easy to extend. It enables developers to compose complex UIs by combining simpler components efficiently.
 
 ### 5. Testability
 By leveraging MVVM and Combine, the library enforces a structure that is inherently testable. Each ViewModel can be unit tested independently of the UI, ensuring the behavior of the components is verified without needing to interact with the user interface.
@@ -136,6 +135,7 @@ By leveraging MVVM and Combine, the library enforces a structure that is inheren
 This results in faster development cycles, fewer bugs, and easier debugging.
 
 ### 6. Flexible and Easy-to-Use Views
+
 After understanding the basic structure, integrating the components into your project becomes a simple task. The views are designed to be flexible with customizable styles and can be extended by modifying their corresponding ViewModel. Developers can easily create a variety of UI elements with just a few lines of code.
 
 Example: 
@@ -151,22 +151,88 @@ ComponentView(
 ```
 
 ### 7. Combining Views
+
 The library also provides container views to combine multiple component views into more complex layouts, reducing the need for boilerplate code when creating more intricate UIs.  Such as **VerticalComponentView**, **HorizontalComponentView** and **ScrollableComponentView**
 
 ## Conclusion
 
-The ViewComponent library is a powerful framework for developers looking to build reusable and customizable UI components in SwiftUI, all while maintaining best practices in architecture and testability. By enforcing the MVVM pattern with Combine, the library ensures clean separation of concerns, enhanced testability, and flexibility, making it a valuable tool for modern SwiftUI applications.
+The SwiftUIComponentKit library is a powerful framework for building reusable, customizable UI components in SwiftUI while maintaining best practices in architecture and testability. By leveraging the MVVM pattern with Combine, it ensures a clean separation of concerns, enhanced testability, and flexibility, making it a valuable tool for modern SwiftUI applications.
 
-Whether you're building simple UIs or complex layouts, ViewComponent simplifies the development process and promotes maintainable, scalable, and easily testable code. With its modular approach, it's easy to extend, and its integration with SwiftUI ensures that you're working with the most modern and efficient design patterns available.
+Whether you're building simple UIs or complex layouts, SwiftUIComponentKit streamlines development while promoting maintainable, scalable, and testable code. Its modular design makes it easy to extend, and its tight integration with SwiftUI ensures you're using the latest and most efficient design patterns.
 
-### Compatibility 
+## Compatibility 
 
 iOS 17 +
 
-### Installation
+## Installation
 
-To use the ViewComponent library, simply integrate into your Xcode project using Swift Package manager and import SwiftUIComponentKit.
+### Swift Package Manager:
+
+To use the SwiftUIComponentKit library, simply integrate into your Xcode project's target using Swift Package manager and import SwiftUIComponentKit.
+
+### Create Yor Own Component Kit:
 
 ```swift 
 import SwiftUI
+
+// 1. A Component View Model
+class MySpecialComponentViewModel: ObservableObject, Identifiable {
+    @Published var id = UUID().uuidString
+    @Published var text: String
+    @Published var font: Font
+    
+    init(text: String, font: Font = .body) {
+        self.text = text
+        self.font = font
+    }
+}
+
+// 2. A Component View
+struct MySpecialComponentView: View {
+    @ObservedObject var viewModel: MySpecialComponentViewModel
+    
+    var body: some View {
+        Text(viewModel.text)
+            .font(viewModel.font)
+    }
+}
+
+// 3. Base Component Enumerated Type
+enum MyViewComponent {
+    case myComponent(viewModel: MySpecialComponentViewModel)
+}
+
+// 4. Base Component View
+struct MyComponentView: View {
+    private let viewComponent: MyViewComponent
+    
+    init(viewComponent: MyViewComponent) {
+        self.viewComponent = viewComponent
+    }
+    
+    public var body: some View {
+        switch viewComponent {
+        case .myComponent(let viewModel):
+            MySpecialComponentView(viewModel: viewModel)
+        }
+    }
+}
+
+// 5. Usage
+struct MyScreen: View {
+    @StateObject var topComponentViewModel = MySpecialComponentViewModel(
+        text: "Top Component",
+        font: .title.bold()
+    )
+    @StateObject var bottomComponentViewModel = MySpecialComponentViewModel(
+        text: "Bottom Component"
+    )
+    
+    public var body: some View {
+        VStack(spacing: .zero) {
+            MyComponentView(viewComponent: .myComponent(viewModel: topComponentViewModel))
+            MyComponentView(viewComponent: .myComponent(viewModel: bottomComponentViewModel))
+        }
+    }
+}
 ```
