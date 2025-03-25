@@ -45,4 +45,9 @@ extension View {
     func navigatable<Destination: View>(_ destination: Destination?) -> some View {
         modifier(NavigationLinkModifier(destination: destination))
     }
+    
+    /// `TextFieldBehaviorModifier`
+    func textFieldBehavior(_ viewModel: TextFieldComponentViewModel) -> some View {
+        modifier(TextFieldBehaviorModifier(viewModel: viewModel))
+    }
 }

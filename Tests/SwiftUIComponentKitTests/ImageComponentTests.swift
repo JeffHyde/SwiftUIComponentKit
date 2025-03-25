@@ -5,23 +5,14 @@ import SwiftUI
 struct ImageComponentTests {
     @Test func init_with_default() async throws {
         let viewModel = ImageComponentViewModel()
-        if case .system(name: "trash", scale: .large) = viewModel.type {
-            #expect(true)
-        } else {
-            #expect(Bool(false))
-        }
         
-        if case .fit = viewModel.contentMode {
-            #expect(true)
-        } else {
-            #expect(Bool(false))
-        }
-        
+        #expect(viewModel.type == .system(name: "trash", scale: .large))
+        #expect(viewModel.contentMode == .fit)
         #expect(viewModel.backgroundColor == .clear)
         #expect(viewModel.borderColor == .clear)
-        #expect(viewModel.borderWidth == 0)
-        #expect(viewModel.innerCornerRadius == 0)
-        #expect(viewModel.outerCornerRadius == 0)
+        #expect(viewModel.borderWidth == .none)
+        #expect(viewModel.innerCornerRadius == .none)
+        #expect(viewModel.outerCornerRadius == .none)
         #expect(viewModel.width == nil)
         #expect(viewModel.height == nil)
         #expect(viewModel.progressSize == 44)
@@ -34,15 +25,14 @@ struct ImageComponentTests {
         }
         
         #expect(viewModel.cache == nil)
-        #expect(viewModel.innerPadding.top == 0)
-        #expect(viewModel.innerPadding.bottom == 0)
-        #expect(viewModel.innerPadding.leading == 0)
-        #expect(viewModel.innerPadding.trailing == 0)
-        #expect(viewModel.outerPadding.top == 0)
-        #expect(viewModel.outerPadding.bottom == 0)
-        #expect(viewModel.outerPadding.leading == 0)
-        #expect(viewModel.outerPadding.trailing == 0)
-        
+        #expect(viewModel.innerPadding.top == .none)
+        #expect(viewModel.innerPadding.bottom == .none)
+        #expect(viewModel.innerPadding.leading == .none)
+        #expect(viewModel.innerPadding.trailing == .none)
+        #expect(viewModel.outerPadding.top == .none)
+        #expect(viewModel.outerPadding.bottom == .none)
+        #expect(viewModel.outerPadding.leading == .none)
+        #expect(viewModel.outerPadding.trailing == .none)
         #expect(viewModel.loaded == false)
         #expect(viewModel.error == nil)
     }

@@ -24,10 +24,10 @@ struct PickerComponentView: View {
         .background(RoundedRectangle(cornerRadius: 6).foregroundStyle(viewModel.backgroundColor))
         .padding(
             EdgeInsets(
-                top: viewModel.innerPadding.top,
-                leading: viewModel.innerPadding.leading,
-                bottom: viewModel.innerPadding.bottom,
-                trailing: viewModel.innerPadding.trailing
+                top: viewModel.outerPadding.top,
+                leading: viewModel.outerPadding.leading,
+                bottom: viewModel.outerPadding.bottom,
+                trailing: viewModel.outerPadding.trailing
             )
         )
     }
@@ -46,7 +46,7 @@ struct PickerComponentView: View {
             selectedItem: items[0],
             items: items,
             backgroundColor: .blue,
-            innerPadding: .all(.xSmall),
+            innerPadding: .all(.medium),
             outerPadding: .all(.large),
             action: { item in
                 print("Item Selected: \(item)")

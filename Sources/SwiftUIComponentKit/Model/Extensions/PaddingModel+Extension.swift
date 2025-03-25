@@ -11,6 +11,16 @@ public extension PaddingModel {
         return PaddingModel(top: vertical, leading: horizontal, bottom: vertical, trailing: horizontal)
     }
     
+    /// PaddingModel(top: top, leading: leading, bottom: bottom, trailing: trailing)
+    static func all(
+        _ top: Double = .none,
+        _ leading: Double = .none,
+        _ bottom: Double = .none,
+        _ trailing: Double = .none
+    ) -> PaddingModel {
+        return PaddingModel(top: top, leading: leading, bottom: bottom, trailing: trailing)
+    }
+    
     /// PaddingModel(top: value, leading: .extraLarge, bottom: value, trailing: .none)
     static func vertical(_ value: Double) -> PaddingModel {
         return PaddingModel(top: value, leading: .none, bottom: value, trailing: .none)

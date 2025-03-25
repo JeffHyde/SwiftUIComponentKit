@@ -1,32 +1,24 @@
 import Testing
 @testable import SwiftUIComponentKit
 
-struct TextComponentTests {
+struct AdvertismentComponentlTests {
     @Test func init_with_default() async throws {
-        let text = "Hello World!"
-        let viewModel = TextComponentViewModel(textType: .standard(text))
+        let textViewModel = TextComponentViewModel(textType: .standard("Hello World"))
+        let viewModel = AdvertismentComponentViewModel(leadingTopTextViewModel: textViewModel)
         
-        if case .standard(text) = viewModel.textType {
-            #expect(true)
-        } else {
-            #expect(Bool(false))
-        }
-        
-        #expect(viewModel.font == .body)
-        #expect(viewModel.textAlignment == .center)
-        #expect(viewModel.horizontalAlignment == nil)
-        #expect(viewModel.foregroundColor == .primary)
+        #expect(viewModel.leadingTopTextViewModel == textViewModel)
+        #expect(viewModel.leadingCenterTextViewModel == nil)
+        #expect(viewModel.leadingBottomTextViewModel == nil)
+        #expect(viewModel.trailingTopTextViewModel == nil)
+        #expect(viewModel.trailingCenterTextViewModel == nil)
+        #expect(viewModel.trailingBottomTextViewModel == nil)
+        #expect(viewModel.imageViewModel == nil)        
+        #expect(viewModel.imagePlacment == .center)
         #expect(viewModel.backgroundColor == .clear)
         #expect(viewModel.borderColor == .clear)
         #expect(viewModel.borderWidth == .none)
         #expect(viewModel.cornerRadius == .none)
-        
-        if case .flexible = viewModel.sizeType {
-            #expect(true)
-        } else {
-            #expect(Bool(false))
-        }
-        
+        #expect(viewModel.shadowRadius == .none)
         #expect(viewModel.innerPadding.top == .none)
         #expect(viewModel.innerPadding.bottom == .none)
         #expect(viewModel.innerPadding.leading == .none)
@@ -35,7 +27,6 @@ struct TextComponentTests {
         #expect(viewModel.outerPadding.bottom == .none)
         #expect(viewModel.outerPadding.leading == .none)
         #expect(viewModel.outerPadding.trailing == .none)
-        #expect(viewModel.outerBackgroundColor == .clear)
         #expect(viewModel.action == nil)
     }
 }

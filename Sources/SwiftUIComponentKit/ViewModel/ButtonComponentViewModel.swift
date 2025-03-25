@@ -6,7 +6,7 @@ open class ButtonComponentViewModel: ComponentViewModel {
     public var action: ((String) -> ())?
 
     public init(
-        labelComponent: ViewComponent = .text(viewModel: TextComponentViewModel(textType: .standard("Hello"))),
+        labelComponent: ViewComponent = .text(viewModel: TextComponentViewModel(textType: .standard(""))),
         padding: PaddingModel = PaddingModel(),
         action: ((String) -> ())? = nil
     ) {

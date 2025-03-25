@@ -12,6 +12,8 @@ public struct ComponentView: View {
     
     public var body: some View {
         switch viewComponent {
+        case .advertisment(viewModel: let viewModel):
+            AdvertismentComponentView(viewModel: viewModel)
         case .button(let viewModel):
             ButtonComponentView(viewModel: viewModel)
         case .cell(let viewModel):
@@ -28,6 +30,8 @@ public struct ComponentView: View {
             SliderComponentView(viewModel: viewModel)
         case .text(let viewModel):
             TextComponentView(viewModel: viewModel)
+        case .textField(let viewModel):
+            TextFieldComponentView(viewModel: viewModel)
         case .toggle(let viewModel):
             ToggleComponentView(viewModel: viewModel)
         }

@@ -66,7 +66,7 @@ open class ImageComponentViewModel: ComponentViewModel {
         switch type {
         case .async(let url, _):
             guard let url, let _ = url.host(), let _ = url.scheme else { return nil }
-            return cache?.cachedImage(urlString: url.absoluteString)
+            return cache?.image(urlStringKey: url.absoluteString)
         default:
             return nil
         }
@@ -88,7 +88,7 @@ open class ImageComponentViewModel: ComponentViewModel {
         switch type {
         case .async(let url, _):
             guard let url, let _ = url.host(), let _ = url.scheme else { return }
-            cache?.cacheImage(image: image, urlString: url.absoluteString)
+            cache?.cacheImage(image: image, urlStringKey: url.absoluteString)
         default:
             break
         }

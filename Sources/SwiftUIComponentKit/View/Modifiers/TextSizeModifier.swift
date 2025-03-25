@@ -11,7 +11,7 @@ struct TextSizeModifier: ViewModifier {
             content.frame(height: height)
         case .widthAndHeight(let width, let height):
             content.frame(width: width, height: height)
-        case .flexable:
+        case .flexible:
             content
         }
     }
