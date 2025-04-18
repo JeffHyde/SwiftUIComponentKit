@@ -29,7 +29,7 @@ open class TextComponentViewModel: ComponentViewModel {
         borderColor: Color = .clear,
         borderWidth: Double = .zero,
         cornerRadius: Double = .zero,
-        sizeType: TextSizeType = .flexable,
+        sizeType: TextSizeType = .flexible,
         innerPadding: PaddingModel = PaddingModel(),
         outerPadding: PaddingModel = PaddingModel(),
         outerBackgroundColor: Color = .clear,

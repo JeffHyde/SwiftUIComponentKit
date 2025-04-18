@@ -21,7 +21,7 @@ struct TextComponentTests {
         #expect(viewModel.borderWidth == 0)
         #expect(viewModel.cornerRadius == 0)
         
-        if case .flexable = viewModel.sizeType {
+        if case .flexible = viewModel.sizeType {
             #expect(true)
         } else {
             #expect(Bool(false))

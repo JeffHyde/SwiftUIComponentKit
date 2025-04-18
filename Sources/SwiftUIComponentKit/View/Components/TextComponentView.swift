@@ -78,7 +78,7 @@ struct TextComponentView: View {
                 borderColor: .primary,
                 borderWidth: .xSmall,
                 cornerRadius: .xLarge,
-                sizeType: .flexable,
+                sizeType: .flexible,
                 innerPadding: .all(.xLarge),
                 outerPadding: .all(.none),
                 action: { id in
