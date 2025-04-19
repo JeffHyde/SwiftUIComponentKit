@@ -4,7 +4,7 @@ import SwiftUI
 public class ComponentImageCache: ImageCacheable, @unchecked Sendable {
 
     /// The NSCache for storing images
-    public var cache = NSCache<NSString, UIImage>()
+    private var cache = NSCache<NSString, UIImage>()
     
     /// The operation queue
     private let cacheQueue: DispatchQueue
