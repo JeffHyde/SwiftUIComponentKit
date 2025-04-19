@@ -12,6 +12,8 @@ public struct ComponentView: View {
     
     public var body: some View {
         switch viewComponent {
+        case .advertisment(viewModel: let viewModel):
+            AdvertismentComponentView(viewModel: viewModel)
         case .button(let viewModel):
             ButtonComponentView(viewModel: viewModel)
         case .cell(let viewModel):

@@ -13,4 +13,6 @@ public enum ViewComponent {
     case slider(viewModel: SliderComponentViewModel)
     case text(viewModel: TextComponentViewModel)
     case toggle(viewModel: ToggleComponentViewModel)
+    
+    case advertisment(viewModel: AdvertismentComponentViewModel)
 }
