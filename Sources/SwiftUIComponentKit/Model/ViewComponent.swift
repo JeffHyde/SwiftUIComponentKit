@@ -4,6 +4,7 @@ import SwiftUI
 ///
 /// An enumerated type representing different ``View`` components within the ``SwiftUIComponentKit``.
 public enum ViewComponent {
+    case advertisment(viewModel: AdvertismentComponentViewModel)
     case button(viewModel: ButtonComponentViewModel)
     case cell(viewModel: CellComponentViewModel)
     case divider(viewModel: DividerComponentViewModel)

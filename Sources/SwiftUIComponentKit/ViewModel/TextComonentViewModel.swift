@@ -17,8 +17,6 @@ open class TextComponentViewModel: ComponentViewModel {
     @Published public var outerBackgroundColor: Color
     public var action: ((String) -> ())?
     
-    private var cancellables: Set<AnyCancellable> = Set()
-    
     public init(
         textType: TextType,
         font: Font = .body,

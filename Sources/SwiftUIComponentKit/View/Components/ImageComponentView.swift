@@ -40,9 +40,7 @@ struct ImageComponentView: View {
                     }
                 }
             case .system(let name, let scale):
-                Image(systemName: name)
-                    .imageScale(scale)
-                    .imageModifier(viewModel)
+                SystemImage(name, scale)
             case .custom(let name):
                 ResizedImage(Image(name))
             }
@@ -58,6 +56,20 @@ struct ImageComponentView: View {
             .imageModifier(viewModel)
             .opacity(viewModel.loaded ? 1 : 0)
     }
+    
+    @ViewBuilder
+    private func SystemImage(_ name: String, _ scale: Image.Scale?) -> some View {
+        if let scale {
+            Image(systemName: name)
+                .imageScale(scale)
+                .imageModifier(viewModel)
+        } else {
+            Image(systemName: name)
+                .resizable()
+                .aspectRatio(contentMode: viewModel.contentMode)
+                .imageModifier(viewModel)
+        }
+    }
 }
 
 #Preview {
@@ -67,19 +79,19 @@ struct ImageComponentView: View {
         ImageComponentView(
             viewModel: ImageComponentViewModel(
                 type: .system(name: "person", scale: .large),
+                contantMode: .fit,
                 backgroundColor: .yellow,
                 borderColor: .black,
                 borderWidth: 6,
                 outerCornerRadius: 50,
                 width: 100,
-                height: 100,
-                imageCache: .custom(imageCache),
+                height: 200,
                 outerPadding: .all(24)
             )
         )
         
         VStack {
-            ForEach(0..<100, id: \.self) {item in
+            ForEach(0..<3, id: \.self) {item in
                 ImageComponentView(viewModel: ImageComponentViewModel(
                     type: .async(
                         url:  URL(string:
