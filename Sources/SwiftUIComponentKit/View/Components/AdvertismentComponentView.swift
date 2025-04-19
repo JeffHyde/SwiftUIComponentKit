@@ -14,19 +14,16 @@ struct AdvertismentComponentView: View {
             if viewModel.imagePlacment == .leading {
                 ImageComponent(viewModel: viewModel.imageViewModel)
             }
+            
             VStack(spacing: .zero) {
                 TextComponent(viewModel: viewModel.leadingTopTextViewModel)
                 TextComponent(viewModel: viewModel.leadingCenterTextViewModel)
                 TextComponent(viewModel: viewModel.leadingBottomTextViewModel)
             }
             
-            Spacer()
-            
             if viewModel.imagePlacment == .center {
                 ImageComponent(viewModel: viewModel.imageViewModel)
             }
-            
-            Spacer()
             
             VStack(spacing: .zero) {
                 TextComponent(viewModel: viewModel.trailingTopTextViewModel)
