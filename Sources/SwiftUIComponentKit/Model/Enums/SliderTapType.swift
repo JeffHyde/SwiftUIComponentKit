@@ -5,8 +5,8 @@ public enum SliderTapType: Equatable {
     /// No tap gesture
     case none
     
-    /// A closure type with an ID for recognition
-    case custom((_ id: String)->())
+    /// A closure type with an ID for comparison
+    case custom(id: String, (_ id: String)->())
     
     /// Used for the ``SliderComponentView``,
     case pointConversion
@@ -15,8 +15,8 @@ public enum SliderTapType: Equatable {
         switch (lhs, rhs) {
         case (.none, .none), (.pointConversion, .pointConversion):
             return true
-        case (.custom, .custom):
-            return false
+        case (.custom(let idA, _), .custom(let idB, _)):
+            return idA == idB
         default:
             return false
         }

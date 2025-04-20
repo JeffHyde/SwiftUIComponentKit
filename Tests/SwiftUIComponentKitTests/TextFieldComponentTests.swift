@@ -1,32 +1,27 @@
+//
+//  Test.swift
+//  SwiftUIComponentKit
+//
+//  Created by Jeff  Hyde on 4/20/25.
+//
+
 import Testing
 @testable import SwiftUIComponentKit
 
-struct TextComponentTests {
+struct TextFieldComponentTests {
     @Test func init_with_default() async throws {
         let text = "Hello World!"
-        let viewModel = TextComponentViewModel(textType: .standard(text))
+        let viewModel = TextFieldComponentViewModel(text: text)
         
-        if case .standard(text) = viewModel.textType {
-            #expect(true)
-        } else {
-            #expect(Bool(false))
-        }
-        
+        #expect(viewModel.text == text)
+        #expect(viewModel.localizedPlaceHolder == "")
         #expect(viewModel.font == .body)
-        #expect(viewModel.textAlignment == .center)
         #expect(viewModel.horizontalAlignment == nil)
         #expect(viewModel.foregroundColor == .primary)
         #expect(viewModel.backgroundColor == .clear)
         #expect(viewModel.borderColor == .clear)
         #expect(viewModel.borderWidth == .none)
         #expect(viewModel.cornerRadius == .none)
-        
-        if case .flexible = viewModel.sizeType {
-            #expect(true)
-        } else {
-            #expect(Bool(false))
-        }
-        
         #expect(viewModel.innerPadding.top == .none)
         #expect(viewModel.innerPadding.bottom == .none)
         #expect(viewModel.innerPadding.leading == .none)
@@ -35,7 +30,10 @@ struct TextComponentTests {
         #expect(viewModel.outerPadding.bottom == .none)
         #expect(viewModel.outerPadding.leading == .none)
         #expect(viewModel.outerPadding.trailing == .none)
-        #expect(viewModel.outerBackgroundColor == .clear)
-        #expect(viewModel.action == nil)
+        #expect(viewModel.autocorrectionDisabled == true)
+        #expect(viewModel.textInputAutocapitalization == .sentences)
+        #expect(viewModel.keyboardType == .default)
+        #expect(viewModel.submitLabel == .done)
+        #expect(viewModel.isSecure == false)
     }
 }

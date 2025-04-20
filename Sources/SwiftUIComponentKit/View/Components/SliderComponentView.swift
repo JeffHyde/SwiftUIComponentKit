@@ -24,8 +24,8 @@ struct SliderComponentView: View {
                     switch viewModel.tapType {
                     case .none:
                         break
-                    case .custom(let closure):
-                        closure(viewModel.id)
+                    case .custom(let id, let closure):
+                        closure(id)
                     case .pointConversion:
                         viewModel.handleTapConversion(point, proxy.size.width)
                     }

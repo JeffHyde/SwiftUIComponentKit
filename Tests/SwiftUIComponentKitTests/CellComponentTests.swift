@@ -14,9 +14,9 @@ struct CellComponentTests {
         #expect(viewModel.leadingImageAlignment == .center)
         #expect(viewModel.backgroundColor == .clear)
         #expect(viewModel.borderColor == .clear)
-        #expect(viewModel.cornerRadius == 0.0)
-        #expect(viewModel.borderWidth == 0.0)
-        #expect(viewModel.shadowRadius == 0.0)
+        #expect(viewModel.cornerRadius == .none)
+        #expect(viewModel.borderWidth == .none)
+        #expect(viewModel.shadowRadius == .none)
         #expect(viewModel.action == nil)
     }
 }
