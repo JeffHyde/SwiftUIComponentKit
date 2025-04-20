@@ -7,9 +7,9 @@ struct ToggleComponentTests {
         
         #expect(viewModel.isOn == false)
         #expect(viewModel.horizontalAlignment == .none)
-        #expect(viewModel.padding.top == 0)
-        #expect(viewModel.padding.bottom == 0)
-        #expect(viewModel.padding.leading == 0)
-        #expect(viewModel.padding.trailing == 0)
+        #expect(viewModel.padding.top == .none)
+        #expect(viewModel.padding.bottom == .none)
+        #expect(viewModel.padding.leading == .none)
+        #expect(viewModel.padding.trailing == .none)
     }
 }

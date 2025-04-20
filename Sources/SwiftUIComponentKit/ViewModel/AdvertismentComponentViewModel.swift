@@ -1,5 +1,4 @@
 import SwiftUI
-import Combine
 
 open class AdvertismentComponentViewModel: ComponentViewModel {
     @Published public var leadingTopTextViewModel: TextComponentViewModel
@@ -19,7 +18,7 @@ open class AdvertismentComponentViewModel: ComponentViewModel {
     @Published public var outerPadding: PaddingModel
     public var action: ((String) -> ())?
     
-    init(
+    public init(
         leadingTopTextViewModel: TextComponentViewModel,
         leadingCenterTextViewModel: TextComponentViewModel? = nil,
         leadingBottomTextViewModel: TextComponentViewModel? = nil,

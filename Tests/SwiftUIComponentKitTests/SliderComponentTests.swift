@@ -8,37 +8,23 @@ struct SliderComponentTests {
         
         #expect(viewModel.value == 0.0)
         #expect(viewModel.range == 0.0...100.0)
-        #expect(viewModel.padding.top == 0)
-        #expect(viewModel.padding.bottom == 0)
-        #expect(viewModel.padding.leading == 0)
-        #expect(viewModel.padding.trailing == 0)
+        #expect(viewModel.padding.top == .none)
+        #expect(viewModel.padding.bottom == .none)
+        #expect(viewModel.padding.leading == .none)
+        #expect(viewModel.padding.trailing == .none)
         #expect(viewModel.tapCount == 1)
-        
-        if case .none = viewModel.tapType {
-            #expect(true)
-        } else {
-            #expect(Bool(false))
-        }
+        #expect(viewModel.tapType == .none)
     }
     
     @Test func init_with_pointConversion() async throws {
         let viewModel = SliderComponentViewModel(tapType: .pointConversion)
-
-        if case .pointConversion = viewModel.tapType {
-            #expect(true)
-        } else {
-            #expect(Bool(false))
-        }
+        #expect(viewModel.tapType == .pointConversion)
     }
     
     @Test func init_with_custom() async throws {
-        let viewModel = SliderComponentViewModel(tapType: .custom { id in })
-
-        if case .custom = viewModel.tapType {
-            #expect(true)
-        } else {
-            #expect(Bool(false))
-        }
+        let tapType: SliderTapType = .custom(id: "0") { id in }
+        let viewModel = SliderComponentViewModel(tapType: tapType)
+        #expect(viewModel.tapType == tapType)
     }
     
     @Test func tap_did_convertToPoint() async throws {

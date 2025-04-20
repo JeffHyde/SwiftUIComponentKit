@@ -2,7 +2,6 @@ import SwiftUI
 
 /// The default SwiftUIComponentKit image cache
 public class ComponentImageCache: ImageCacheable, @unchecked Sendable {
-
     /// The NSCache for storing images
     private var cache = NSCache<NSString, UIImage>()
     
@@ -11,7 +10,7 @@ public class ComponentImageCache: ImageCacheable, @unchecked Sendable {
     
     /// Creates a ComponentImageCache
     /// - Parameter cacheQueue: The dispatch que to sync on
-    /// - Parameter limit: The maximum number of objects the cache should hold.
+    /// - Parameter limit: The maximum number of objects the cache should hold
     public init(
         cacheQueue: DispatchQueue = DispatchQueue(label: "imagecache_queue", attributes: .concurrent),
         limit: Int = 100

@@ -30,6 +30,8 @@ public struct ComponentView: View {
             SliderComponentView(viewModel: viewModel)
         case .text(let viewModel):
             TextComponentView(viewModel: viewModel)
+        case .textField(let viewModel):
+            TextFieldComponentView(viewModel: viewModel)
         case .toggle(let viewModel):
             ToggleComponentView(viewModel: viewModel)
         }
