@@ -54,7 +54,7 @@ struct TextComponentView: View {
     @Previewable @Environment(\.dynamicTypeSize) var dynamicTypeSize
     let attributedString: NSMutableAttributedString = {
         let text = "Hello World"
-        var string = NSMutableAttributedString(string: text)
+        let string = NSMutableAttributedString(string: text)
         string.addAttributes(
             [
                 .foregroundColor: UIColor.yellow,

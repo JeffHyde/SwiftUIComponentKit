@@ -13,5 +13,6 @@ public enum ViewComponent {
     case progress(viewModel: ProgressComponentViewModel)
     case slider(viewModel: SliderComponentViewModel)
     case text(viewModel: TextComponentViewModel)
+    case textField(viewModel: TextFieldComponentViewModel)
     case toggle(viewModel: ToggleComponentViewModel)
 }

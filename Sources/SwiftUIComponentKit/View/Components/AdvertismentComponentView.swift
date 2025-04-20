@@ -60,6 +60,7 @@ struct AdvertismentComponentView: View {
                 trailing: viewModel.outerPadding.trailing
             )
         )
+        .onTapModifier(id: viewModel.id, onTap: viewModel.action)
     }
     
     @ViewBuilder
@@ -121,7 +122,7 @@ struct AdvertismentComponentView: View {
             shadowRadius: .xSmall,
             innerPadding: .all(.small),
             outerPadding: .all(.small),
-            action: nil
+            action: { id in print("Tapped: \(id)")}
         )
     )
 }
