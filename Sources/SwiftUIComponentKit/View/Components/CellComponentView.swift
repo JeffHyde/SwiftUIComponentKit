@@ -50,10 +50,24 @@ struct CellComponentView: View {
         .clipShape(RoundedRectangle(cornerRadius: viewModel.cornerRadius))
         .background(
             RoundedRectangle(cornerRadius: viewModel.cornerRadius)
-                .foregroundStyle(viewModel.backgroundColor )
-                .shadow(radius: viewModel.shadowRadius, x: 0, y: viewModel.shadowRadius)
+                .foregroundStyle(viewModel.backgroundColor)
+                .shadow(
+                    radius: viewModel.shadowRadius,
+                    x: 0,
+                    y: viewModel.shadowRadius
+                )
         )
-        .onTapModifier(id: viewModel.id, onTap: viewModel.action)
+        .overlay(
+            RoundedRectangle(cornerRadius: viewModel.cornerRadius)
+                .stroke(
+                    viewModel.borderColor,
+                    lineWidth: viewModel.borderWidth
+                )
+        )
+        .onTapModifier(
+            id: viewModel.id,
+            onTap: viewModel.action
+        )
         .navigatable(viewModel.navigationDestination)
         .padding(
             EdgeInsets(

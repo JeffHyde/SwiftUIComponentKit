@@ -3,7 +3,7 @@ import SwiftUI
 /// The Base View Type for ``SwiftUIComponentKit``.
 ///
 /// An enumerated type representing different ``View`` components within the ``SwiftUIComponentKit``.
-public enum ViewComponent: Equatable {
+public enum ViewComponent: Equatable, Identifiable, Hashable {
     case advertisment(viewModel: AdvertismentComponentViewModel)
     case button(viewModel: ButtonComponentViewModel)
     case cell(viewModel: CellComponentViewModel)
@@ -15,6 +15,22 @@ public enum ViewComponent: Equatable {
     case text(viewModel: TextComponentViewModel)
     case textField(viewModel: TextFieldComponentViewModel)
     case toggle(viewModel: ToggleComponentViewModel)
+    
+    public var id: String {
+        switch self {
+        case .advertisment(let vm): return vm.id
+        case .button(let vm): return vm.id
+        case .cell(let vm): return vm.id
+        case .divider(let vm): return vm.id
+        case .image(let vm): return vm.id
+        case .picker(let vm): return vm.id
+        case .progress(let vm): return vm.id
+        case .slider(let vm): return vm.id
+        case .text(let vm): return vm.id
+        case .textField(let vm): return vm.id
+        case .toggle(let vm): return vm.id
+        }
+    }
     
     public static func == (lhs: ViewComponent, rhs: ViewComponent) -> Bool {
         switch (lhs, rhs) {
